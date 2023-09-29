@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+    id 'war'
+    id 'org.springframework.boot' version '2.7.7'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    implementation group: 'org.keycloak', name: 'keycloak-spring-security-adapter', version: '19.0.1'
+    implementation group: 'org.keycloak', name: 'keycloak-spring-boot-starter', version: '19.0.1'
+    implementation group: 'org.keycloak',name: 'keycloak-admin-client',  version: '19.0.1'
+    // DB
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.0'
+    runtimeOnly 'org.postgresql:postgresql'
+    // Spring Security Jwt
+    implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
+    // test Lombok
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+    // Swagger
+    implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+    //implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+    implementation("io.springfox:springfox-swagger2:2.9.2") {
+        exclude module: 'swagger-annotations'
+        exclude module: 'swagger-models'
+    }
+    implementation('io.swagger:swagger-annotations:1.6.6')
+    implementation('io.swagger:swagger-models:1.6.6')
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

@@ -1,0 +1,25 @@
+
+
+
+spring:
+  mvc:
+    path match:
+      matching-strategy: ant_path_matcher
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    jdbc-url: jdbc:postgresql://localhost:5432/test
+    username: ijaeyeong
+    password: 1234
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
+keycloak:
+  enabled: true
+  realm: keti_iam_server_realm
+  auth-server-url: http://localhost:8090
+  ssl-required: external
+  resource: keti_iam_server_client
+  credentials:
+    secret: Jx8gkI4e3fuNHNgOKLopKB9CKcwk08XJ
+  use-resource-role-mappings: true
+  bearer-only: true
+
